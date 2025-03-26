@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth System</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <input type="email" placeholder="Email" id="loginEmail" required>
+        <input type="password" placeholder="Password" id="loginPassword" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Signup</h2>
+    <form id="signupForm">
+        <input type="email" placeholder="Email" id="signupEmail" required>
+        <input type="password" placeholder="Password" id="signupPassword" required>
+        <button type="submit">Signup</button>
+    </form>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: document.getElementById("loginEmail").value,
+                    password: document.getElementById("loginPassword").value
+                }),
+            });
+            alert(await res.text());
+        });
+
+        document.getElementById("signupForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const res = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: document.getElementById("signupEmail").value,
+                    password: document.getElementById("signupPassword").value
+                }),
+            });
+            alert(await res.text());
+        });
+    </script>
+</body>
+</html>
