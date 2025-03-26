@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaper</title>
+    <title>Leaper - Productivity for Creators</title>
     <style>
         :root {
             --accent-color: #DAA520; /* Darker Yellow in Light Mode */
@@ -30,8 +30,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
             z-index: 1000;
         }
         .navbar .brand {
@@ -40,45 +41,40 @@
             color: var(--accent-color);
         }
         .navbar a {
-            margin: 0 10px;
+            margin: 0 15px;
             text-decoration: none;
             color: var(--text-color);
         }
-        .theme-toggle {
-            cursor: pointer;
-            font-size: 18px;
-            padding: 5px 10px;
-            border: none;
-            background: none;
-            color: var(--text-color);
-        }
-        .section {
-            height: 100vh;
+        .hero {
             display: flex;
             align-items: center;
             justify-content: center;
+            height: 90vh;
             text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            flex-direction: column;
+            animation: fadeInUp 1.5s ease-out;
         }
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .section h1 {
-            font-size: 40px;
+        .content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .content h2 {
             color: var(--accent-color);
-        }
-        .section p {
-            font-size: 18px;
-            max-width: 600px;
         }
         .footer {
             text-align: center;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.1);
-            color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.05);
         }
         .footer a {
             color: var(--accent-color);
@@ -90,61 +86,24 @@
     <div class="navbar">
         <div class="brand">Leaper</div>
         <div>
-            <a href="#">About</a>
-            <a href="#">Services</a>
+            <a href="#">Features</a>
+            <a href="#">Solutions</a>
             <a href="#">Contact</a>
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </div>
     
-    <div class="section" id="hero">
-        <div>
-            <h1>Welcome to Leaper</h1>
-            <p>Enhancing productivity for creators and professionals through cutting-edge tools and services.</p>
-        </div>
+    <div class="hero">
+        <h1>Supercharge Your Productivity</h1>
+        <p>Leaper helps creators and professionals streamline workflows and enhance efficiency.</p>
     </div>
     
-    <div class="section" id="features">
-        <div>
-            <h1>Why Choose Leaper?</h1>
-            <p>Leaper provides intuitive solutions that help streamline workflows, automate tasks, and boost efficiency.</p>
-        </div>
-    </div>
-    
-    <div class="section" id="solutions">
-        <div>
-            <h1>Innovative Solutions</h1>
-            <p>From AI-driven automation to smart project management, Leaper offers cutting-edge tools tailored for your success.</p>
-        </div>
+    <div class="content">
+        <h2>Why Choose Leaper?</h2>
+        <p>Leaper offers innovative solutions designed for modern creators. From automation tools to project management, we help you focus on what matters.</p>
     </div>
     
     <div class="footer">
         <p>Made in India by Ivaan Srivastava | <a href="mailto:ivaansri.contact@gmail.com">Email</a> | <a href="https://youtube.com/@ivaansrivastavadev" target="_blank">YouTube</a></p>
     </div>
-    
-    <script>
-        function toggleTheme() {
-            const currentTheme = document.body.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.body.setAttribute("data-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        }
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-            document.body.setAttribute("data-theme", savedTheme);
-            
-            const sections = document.querySelectorAll(".section");
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    }
-                });
-            }, { threshold: 0.3 });
-            
-            sections.forEach(section => observer.observe(section));
-        });
-    </script>
 </body>
 </html>
