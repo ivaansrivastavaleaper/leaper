@@ -1,4 +1,4 @@
-import { auth, provider, signInWithPopup } from "lib/firebase";
+import { auth, provider, signInWithPopup } from "@/lib/firebase";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
