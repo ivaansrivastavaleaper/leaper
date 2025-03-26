@@ -1,1 +1,161 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaperstuff</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        /* Floating Search Bar */
+        .search-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            z-index: 1000;
+        }
+
+        /* Search bar light mode */
+        .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            background-color: white;
+            color: black;
+        }
+
+        /* Search bar dark mode */
+        .search-bar.dark-mode {
+            background-color: #333;
+        }
+
+        .search-bar.dark-mode input {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .dark-mode-toggle.dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .card.dark-mode {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Search Bar -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search..." id="searchInput">
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle">Toggle Dark Mode</button>
+
+    <!-- Card Example -->
+    <div class="card" id="cardContent">
+        <h2>Leaperstuff</h2>
+        <p>This is an example of a card in the floating layout. You can add more content here.</p>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const card = document.getElementById('cardContent');
+        const searchBar = document.querySelector('.search-bar');
+
+        // Check saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            card.classList.add('dark-mode');
+            darkModeToggle.classList.add('dark-mode');
+            searchBar.classList.add('dark-mode');
+        }
+
+        // Toggle dark mode and save preference
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            card.classList.toggle('dark-mode');
+            darkModeToggle.classList.toggle('dark-mode');
+            searchBar.classList.toggle('dark-mode');
+
+            // Save theme preference
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Basic search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', () => {
+            const searchQuery = searchInput.value.toLowerCase();
+            const content = card.innerText.toLowerCase();
+            
+            // Simple search: if query matches card content, show it; otherwise, hide it
+            if (content.includes(searchQuery)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
