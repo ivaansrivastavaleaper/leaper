@@ -1,10 +1,10 @@
-import { auth, provider, signInWithPopup } from "../../lib/firebase";
+import { auth, signOut } from "../../lib/firebase";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const result = await signInWithPopup(auth, provider);
-      res.status(200).json({ user: result.user });
+      await signOut(auth);
+      res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
