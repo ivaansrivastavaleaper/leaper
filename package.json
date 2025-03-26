@@ -1,5 +1,13 @@
 {
+  "name": "leaper",
+  "version": "1.0.0",
+  "description": "My Firebase project",
+  "main": "index.js",
   "dependencies": {
     "firebase": "^11.5.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'No build step needed'"
   }
 }
